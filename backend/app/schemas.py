@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from datetime import date
-from typing import List, Optional
 
 
 class SaleBase(BaseModel):
@@ -19,8 +18,7 @@ class SaleCreate(SaleBase):
 class Sale(SaleBase):
     id: int
 
-    class Config:
-        from_attributes = True   # Pydantic v2 replacement for orm_mode
+    model_config = {"from_attributes": True}   # Pydantic v2
 
 
 class ForecastPoint(BaseModel):
@@ -31,8 +29,24 @@ class ForecastPoint(BaseModel):
 class UserDtls(BaseModel):
     id: int
     emailid: str
-    pwd: str  # include password
+    pwd: str
 
-    class Config:
-        from_attributes = True
-    
+    model_config = {"from_attributes": True}
+
+
+class ProductSchema(BaseModel):
+    id: int
+    sku: str
+    name: str
+    category: str
+
+    model_config = {"from_attributes": True}   # Pydantic v2
+
+
+class StoreSchema(BaseModel):
+    id: int
+    store_code: str
+    name: str
+    region: str
+
+    model_config = {"from_attributes": True}   # Pydantic v2
