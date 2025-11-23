@@ -137,7 +137,6 @@ from sqlalchemy.orm import Session
 import pandas as pd
 # from app.routes import combined
 from app.routes import auth
-from app.routes import all_details
 from app.database import SessionLocal, engine
 from app import models, crud, schemas, forecast
 # ...existing code...
@@ -178,8 +177,6 @@ app.add_middleware(
 
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 
-app.include_router(all_details.router, prefix="/dtls", tags=["auth"])
-# app.include_router(all_details.router, prefix="/api")
 # from app.routes import combined
 
 # app.include_router(combined.router, prefix="/combined", tags=["combined"])

@@ -76,10 +76,3 @@ def get_sales_df(db: Session, product_id: int, store_id: int):
     df = pd.DataFrame(data)
     df["sale_date"] = pd.to_datetime(df["sale_date"])
     return df
-
-
-def get_all_products(db: Session):
-    return db.query(models.Product).all()
-
-def get_all_stores(db: Session):
-    return db.query(models.Store).all()
