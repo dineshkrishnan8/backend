@@ -1,0 +1,26 @@
+# fastapi
+# uvicorn[standard]
+# sqlalchemy
+# pydantic
+# pyodbc
+# scikit-learn
+# pandas
+# numpy
+# python-dotenv
+# joblib
+# pydantic-settings
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+pyodbc
+scikit-learn
+pandas
+numpy
+python-dotenv
+joblib
+pydantic-settings
+python-multipart
+openpyxl
+
+
