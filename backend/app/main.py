@@ -198,6 +198,25 @@ def read_users(db: Session = Depends(get_db)):
     users = crud.get_all_users(db)
     return users
 
+
+# ---------------------------
+# Single store / product endpoints
+# ---------------------------
+@app.get("/stores/{store_id}", response_model=schemas.StoreSchema)
+def get_store(store_id: int, db: Session = Depends(get_db)):
+    store = db.query(models.Store).filter(models.Store.id == store_id).first()
+    if not store:
+        raise HTTPException(status_code=404, detail="Store not found")
+    return store
+
+
+@app.get("/products/{product_id}", response_model=schemas.ProductSchema)
+def get_product(product_id: int, db: Session = Depends(get_db)):
+    product = db.query(models.Product).filter(models.Product.id == product_id).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return product
+
 # ---------------------------
 # Sales routes
 # ---------------------------
