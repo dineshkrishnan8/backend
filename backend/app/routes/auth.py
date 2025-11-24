@@ -44,47 +44,29 @@
 
 
 from fastapi import APIRouter, HTTPException, Depends
-
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from app.database import SessionLocal
+from app.database import get_db
 from app.models import UserDtls
+from uuid import uuid4
 
 router = APIRouter()
+
 
 class LoginRequest(BaseModel):
     email: str
     password: str
 
-class LoginResponse(BaseModel):
-    message: str
-    success: bool
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-# @router.post("/login", response_model=LoginResponse)
-# def login(data: LoginRequest, db: Session = Depends(get_db)):
-#     user = db.query(UserDtls).filter(UserDtls.emailid == data.email).first()
-#     if not user or user.pwd != data.password:
-#         raise HTTPException(status_code=401, detail="Incorrect email or password")
-#     return {"message": "Login successful", "success": True}
-
-
-# from fastapi import APIRouter, HTTPException, Depends
-# from sqlalchemy.orm import Session
-from app.database import get_db
-from app.models import UserDtls
-
-router = APIRouter()
 
 @router.post("/login")
-def login(email: str, password: str, db: Session = Depends(get_db)):
-    user = db.query(UserDtls).filter(UserDtls.emailid == email).first()
-    if not user or user.pwd != password:
+def login(data: LoginRequest, db: Session = Depends(get_db)):
+    """Authenticate a user using JSON body { email, password }.
+
+    Returns a simple token on success. In a production app replace the
+    token generation with a signed JWT and secure password hashing.
+    """
+    user = db.query(UserDtls).filter(UserDtls.emailid == data.email).first()
+    if not user or user.pwd != data.password:
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    return {"message": "Login successful"}
+    token = str(uuid4())
+    return {"message": "Login successful", "token": token}
