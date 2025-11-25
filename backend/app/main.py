@@ -271,3 +271,8 @@ async def upload_excel(file: UploadFile = File(...), db: Session = Depends(get_d
         db.add(sale)
     db.commit()
     return {"status": "success", "rows_inserted": len(df)}
+
+from app.database import engine
+from app.models import Base
+
+Base.metadata.create_all(bind=engine)
