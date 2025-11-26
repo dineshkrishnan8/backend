@@ -5,9 +5,7 @@ import pandas as pd
 from app.models import UserDtls
 
 
-# ---------------------------
-# Get ALL sales
-# ---------------------------
+
 def get_sales(db: Session):
     return db.query(Sales).all()
 
@@ -16,16 +14,12 @@ def get_all_users(db: Session):
     return db.query(UserDtls).all()
 
 
-# ---------------------------
-# Get sale by ID
-# ---------------------------
+
 def get_sale_by_id(db: Session, sale_id: int):
     return db.query(Sales).filter(Sales.id == sale_id).first()
 
 
-# ---------------------------
-# Create new sale
-# ---------------------------
+
 def create_sale(db: Session, sale_data):
     new_sale = Sales(
         product_id=sale_data.product_id,
@@ -41,9 +35,6 @@ def create_sale(db: Session, sale_data):
     return new_sale
 
 
-# ---------------------------
-# SALES BY PRODUCT + STORE
-# ---------------------------
 def get_sales_by_product_store(db: Session, product_id: int, store_id: int):
     return (
         db.query(Sales)
@@ -54,10 +45,6 @@ def get_sales_by_product_store(db: Session, product_id: int, store_id: int):
 
 
 
-
-# ---------------------------
-# Convert Sales to DataFrame (for forecasting)
-# ---------------------------
 def get_sales_df(db: Session, product_id: int, store_id: int):
     rows = get_sales_by_product_store(db, product_id, store_id)
     if not rows:

@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     DB_PORT: int
     DB_NAME: str
     DB_DRIVER: str
-    DB_ODBC_DRIVER: str   # <-- ADD THIS LINE
+    DB_ODBC_DRIVER: str   
 
     class Config:
         env_file = ".env"

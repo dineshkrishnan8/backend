@@ -11,7 +11,6 @@ def get_combined_details(db: Session = Depends(get_db)):
     products = db.query(Product).all()
     stores = db.query(Store).all()
 
-    # Convert ORM -> Schema
     product_list = [ProductSchema.model_validate(p) for p in products]
     store_list = [StoreSchema.model_validate(s) for s in stores]
 

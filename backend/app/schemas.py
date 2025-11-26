@@ -18,7 +18,7 @@ class SaleCreate(SaleBase):
 class Sale(SaleBase):
     id: int
 
-    model_config = {"from_attributes": True}   # Pydantic v2
+    model_config = {"from_attributes": True}   
 
 
 class ForecastPoint(BaseModel):
@@ -40,7 +40,7 @@ class ProductSchema(BaseModel):
     name: str
     category: str
 
-    model_config = {"from_attributes": True}   # Pydantic v2
+    model_config = {"from_attributes": True}  
 
 
 class StoreSchema(BaseModel):
@@ -49,4 +49,4 @@ class StoreSchema(BaseModel):
     name: str
     region: str
 
-    model_config = {"from_attributes": True}   # Pydantic v2
+    model_config = {"from_attributes": True}  
